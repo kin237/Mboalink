@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mboa Link — Retrouve les tiens en Europe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #0B3B2E;
+    --forest-deep: #072720;
+    --cream: #FAF3E7;
+    --gold: #E3A917;
+    --gold-deep: #B8830D;
+    --red: #C8102E;
+    --line: rgba(250,243,231,0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--forest-deep);
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- Toghu-inspired diamond pattern (signature element) ---------- */
+  .toghu-strip {
+    height: 14px;
+    width: 100%;
+    background-image:
+      linear-gradient(45deg, var(--gold) 25%, transparent 25%, transparent 75%, var(--gold) 75%),
+      linear-gradient(45deg, var(--gold) 25%, transparent 25%, transparent 75%, var(--gold) 75%);
+    background-size: 14px 14px;
+    background-position: 0 0, 7px 7px;
+    background-color: var(--red);
+    opacity: 0.9;
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 6vw;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-tag {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(250,243,231,0.55);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6vw 6vw 8vw;
+    position: relative;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    line-height: 1.02;
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    max-width: 46ch;
+    color: rgba(250,243,231,0.82);
+  }
+
+  /* ---------- Waitlist form ---------- */
+  .waitlist {
+    margin-top: 44px;
+    max-width: 480px;
+  }
+
+  .waitlist form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .waitlist input[type="email"] {
+    flex: 1 1 240px;
+    background: rgba(250,243,231,0.06);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 15px 18px;
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .waitlist input[type="email"]::placeholder { color: rgba(250,243,231,0.4); }
+  .waitlist input[type="email"]:focus {
+    border-color: var(--gold);
+  }
+
+  .btn {
+    background: var(--gold);
+    color: var(--forest-deep);
+    border: none;
+    border-radius: 6px;
+    padding: 15px 26px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { background: #F0BB33; transform: translateY(-1px); }
+  .btn:focus-visible { outline: 3px solid var(--cream); outline-offset: 2px; }
+
+  .waitlist-note {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: rgba(250,243,231,0.5);
+  }
+
+  .confirm {
+    display: none;
+    margin-top: 8px;
+    background: rgba(227,169,23,0.12);
+    border: 1px solid rgba(227,169,23,0.4);
+    border-radius: 6px;
+    padding: 16px 18px;
+    font-size: 0.95rem;
+  }
+  .confirm.show { display: block; }
+  .confirm strong { color: var(--gold); }
+
+  .hero-stats {
+    margin-top: 56px;
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold);
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: rgba(250,243,231,0.6);
+    max-width: 18ch;
+  }
+
+  /* ---------- Sections ---------- */
+  section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 7vw 6vw;
+  }
+
+  .section-head {
+    max-width: 60ch;
+    margin-bottom: 52px;
+  }
+  .section-eyebrow {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+  }
+
+  /* Problem cards */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .problem-card {
+    background: var(--forest-deep);
+    padding: 32px 28px;
+  }
+  .problem-card .mark {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .problem-card p {
+    color: rgba(250,243,231,0.75);
+    font-size: 0.98rem;
+  }
+
+  /* Features */
+  .features {
+    background: var(--forest);
+  }
+  .feature-list {
+    display: grid;
+    gap: 0;
+  }
+  .feature-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .feature-row:last-child { border-bottom: 1px solid var(--line); }
+  .feature-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.05rem;
+  }
+  .feature-row h3 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .feature-row p {
+    color: rgba(250,243,231,0.72);
+    max-width: 56ch;
+  }
+
+  /* Zone */
+  .zone {
+    text-align: center;
+  }
+  .zone-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 999px;
+    padding: 8px 22px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .zone h2 { max-width: 22ch; margin: 0 auto; }
+  .zone p { max-width: 50ch; margin: 20px auto 0; color: rgba(250,243,231,0.75); }
+
+  .city-tags {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .city-tag {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.88rem;
+    color: rgba(250,243,231,0.8);
+  }
+
+  /* Final CTA */
+  .final-cta {
+    background: var(--forest);
+    text-align: center;
+    padding: 8vw 6vw;
+  }
+  .final-cta h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    max-width: 16ch;
+    margin: 0 auto 24px;
+  }
+  .final-cta .waitlist { margin: 0 auto; }
+  .final-cta form { justify-content: center; }
+
+  footer {
+    padding: 32px 6vw 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.82rem;
+    color: rgba(250,243,231,0.45);
+  }
+
+  @media (max-width: 640px) {
+    .feature-row { grid-template-columns: 1fr; gap: 8px; }
+    .hero-stats { gap: 32px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toghu-strip"></div>
+
+<nav>
+  <div class="logo">MBOA<span>·</span>LINK</div>
+  <div class="nav-tag">Communauté camerounaise — Europe</div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Lancement — Europe uniquement</div>
+  <h1>Le pays est loin.<br><em>Les tiens</em>, non.</h1>
+  <p class="hero-sub">Mboa Link connecte les Camerounais d'Europe — pour se rencontrer, se soutenir, et ne plus se sentir seul loin du 237.</p>
+
+  <div class="waitlist">
+    <form id="waitlistForm">
+      <input type="email" id="emailInput" name="email" placeholder="ton.email@exemple.com" required>
+      <button type="submit" class="btn">Rejoindre la liste</button>
+    </form>
+    <div class="confirm" id="confirmMsg"><strong>C'est noté.</strong> Tu seras parmi les premiers invités au lancement.</div>
+    <p class="waitlist-note">Aucun spam. Juste un message quand on ouvre dans ta ville.</p>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">237</div>
+      <div class="stat-label">l'indicatif qu'on n'oublie jamais</div>
+    </div>
+    <div>
+      <div class="stat-num">1ère</div>
+      <div class="stat-label">plateforme pensée par et pour la diaspora</div>
+    </div>
+    <div>
+      <div class="stat-num">EU</div>
+      <div class="stat-label">lancement ciblé sur l'Europe</div>
+    </div>
+  </div>
+</header>
+
+<section class="problem">
+  <div class="section-head">
+    <div class="section-eyebrow">Le constat</div>
+    <h2>Les apps de rencontre classiques n'ont pas été pensées pour toi</h2>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <span class="mark">"</span>
+      <p>Difficile de trouver quelqu'un qui comprend d'où tu viens sans devoir tout réexpliquer — la famille, la langue, les attentes.</p>
+    </div>
+    <div class="problem-card">
+      <span class="mark">"</span>
+      <p>Les groupes Facebook et WhatsApp sont éparpillés, désorganisés, et souvent limités à une seule ville.</p>
+    </div>
+    <div class="problem-card">
+      <span class="mark">"</span>
+      <p>Entre le boulot, les papiers et la distance avec le pays, se faire un vrai réseau en Europe prend des années.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="section-head">
+    <div class="section-eyebrow">Comment ça marche</div>
+    <h2>Une seule plateforme, deux façons de se retrouver</h2>
+  </div>
+  <div class="feature-list">
+    <div class="feature-row">
+      <div class="feature-tag">01</div>
+      <div>
+        <h3>Rencontre</h3>
+        <p>Profils vérifiés, filtres par ville, région d'origine et centres d'intérêt. Pensé pour des connexions sérieuses, pas pour swiper dans le vide.</p>
+      </div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-tag">02</div>
+      <div>
+        <h3>Communauté</h3>
+        <p>Groupes par pays européen, événements locaux (soirées, cultes, associations), petites annonces entre membres — logement, covoiturage, bons plans.</p>
+      </div>
+    </div>
+    <div class="feature-row">
+      <div class="feature-tag">03</div>
+      <div>
+        <h3>Confiance</h3>
+        <p>Vérification d'identité et modération active. Un espace où on ne se sent pas obligé de se méfier de tout le monde.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone">
+  <div class="zone-badge">Phase de lancement</div>
+  <h2>On démarre en Europe, ville par ville</h2>
+  <p>Mboa Link ouvre d'abord dans les villes avec une forte présence camerounaise, pour garantir une vraie communauté active dès le premier jour — pas une app vide.</p>
+  <div class="city-tags">
+    <div class="city-tag">Paris</div>
+    <div class="city-tag">Bruxelles</div>
+    <div class="city-tag">Londres</div>
+    <div class="city-tag">Berlin</div>
+    <div class="city-tag">Genève</div>
+    <div class="city-tag">Milan</div>
+    <div class="city-tag">+ ta ville, si tu t'inscris</div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>Sois parmi les premiers à essayer Mboa Link</h2>
+  <div class="waitlist">
+    <form id="waitlistForm2">
+      <input type="email" id="emailInput2" name="email" placeholder="ton.email@exemple.com" required>
+      <button type="submit" class="btn">Rejoindre la liste</button>
+    </form>
+    <div class="confirm" id="confirmMsg2"><strong>C'est noté.</strong> Tu seras parmi les premiers invités au lancement.</div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Mboa Link — projet en phase de test</div>
+  <div>Fait pour la diaspora, en Europe</div>
+</footer>
+
+<script>
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpqvvnbl';
+
+  function handleWaitlist(formId, inputId, confirmId) {
+    const form = document.getElementById(formId);
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const input = document.getElementById(inputId);
+      const confirmBox = document.getElementById(confirmId);
+      const btn = form.querySelector('.btn');
+      const email = input.value;
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Envoi...';
+
+      try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (response.ok) {
+          confirmBox.classList.add('show');
+          form.style.display = 'none';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Rejoindre la liste';
+          alert("Un souci est survenu, réessaie dans un instant.");
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Rejoindre la liste';
+        alert("Un souci est survenu, réessaie dans un instant.");
+      }
+    });
+  }
+  handleWaitlist('waitlistForm', 'emailInput', 'confirmMsg');
+  handleWaitlist('waitlistForm2', 'emailInput2', 'confirmMsg2');
+</script>
+
+</body>
+</html>
