@@ -1,0 +1,25 @@
+{
+  "name": "Mboa Link",
+  "short_name": "Mboa Link",
+  "description": "Communauté camerounaise en Europe — rencontres et échanges",
+  "start_url": "./mboalink-app-1.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#072720",
+  "theme_color": "#0B3B2E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

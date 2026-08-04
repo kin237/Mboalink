@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0B3B2E"/>
+  <rect x="0" y="0" width="512" height="28" fill="#C8102E"/>
+  <rect x="0" y="0" width="512" height="28" fill="url(#toghu)" opacity="0.9"/>
+  <defs>
+    <pattern id="toghu" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#C8102E"/>
+      <path d="M0 14 L14 0 L28 14 L14 28 Z" fill="#E3A917"/>
+    </pattern>
+  </defs>
+  <text x="256" y="320" font-family="Georgia, serif" font-size="220" font-weight="700" fill="#E3A917" text-anchor="middle">M</text>
+</svg>
